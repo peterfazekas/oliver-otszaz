@@ -6,27 +6,31 @@ import java.util.stream.Collectors;
 public class Cart {
 
     private final int id;
-    private final Map<String, Long>  cart;
+    private final Map<String, Long> goods;
     private final int totalValue;
 
-    public Cart(int id, Map<String, Long> cart, int totalValue) {
+    public Cart(int id, Map<String, Long> goods, int totalValue) {
         this.id = id;
-        this.cart = cart;
+        this.goods = goods;
         this.totalValue = totalValue;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public Long countItemsInCart() {
-        return cart.entrySet().stream()
+        return goods.entrySet().stream()
                 .mapToLong(Map.Entry::getValue)
                 .sum();
     }
 
     public boolean contains(String itemName) {
-        return cart.containsKey(itemName);
+        return goods.containsKey(itemName);
     }
 
     public String getCartContentInDetails() {
-        return cart.entrySet().stream()
+        return goods.entrySet().stream()
                 .map(i -> i.getValue() + " " + i.getKey())
                 .collect(Collectors.joining("\n"));
     }
