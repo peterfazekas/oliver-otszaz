@@ -33,6 +33,16 @@ public class CartService {
         return getCartsByGoods(goods).size();
     }
 
+    public String getCartContentInDetailsById(int id) {
+        return getCartById(id).getCartContentInDetails();
+    }
+
+    public List<String> getTotalValues() {
+        return carts.stream()
+                .map(Cart::toString)
+                .collect(Collectors.toList());
+    }
+
     private List<Cart> getCartsByGoods(String goods) {
         return carts.stream()
                 .filter(i -> i.contains(goods))
